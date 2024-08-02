@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<label for="input">铁子，请输入你家的耗电量：</label>
+	<br />
+	<input type="number" id="input">
+	<button onclick="calculateElectricityBill()">计算</button>
+	<br />
+	<p id="result"></p>
+	<script>
+		function calculateElectricityBill() {
+			const units = document.getElementById("input").value;
+			const price = 0.588;
+			const lv1 = 0.05;
+			const lv2 = 0.3;
+			let bill = 0;
+			if (units <= 200) {
+				bill = units * price;
+			} else if (units <= 450) {
+				bill = 200 * price + (units - 200) * (price + lv1);
+			} else {
+				bill = 200 * price + 250 * (price + lv1) + (units - 450) * (price + lv2);
+			}
+			document.getElementById("result").innerHTML = `这个月的电费是￥${bill.toFixed(2)}`;
+		}
+	</script>
+</body>
+
+</html>
